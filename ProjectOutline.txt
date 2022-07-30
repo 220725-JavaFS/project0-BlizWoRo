@@ -59,4 +59,35 @@ User Deletes message-
 	-Deleted Messages ID stores Deleted Messages
 	-Follow Up Message ID is created for replacement into the location?
 (2 Tables created:
-	1 Table is created Deleted Messages 
+	1 Table is created Deleted Messages
+	1 Table is created for Follow Up Messages)
+
+Use Case 2:
+
+User has same rights as Members
+
+Admin
+
+Use Case 1:
+
+User accepts account-
+	-User logs into admin account
+		-same as regular account but if matching credentials as found for admin, admin settings will show instead of regular account (same with moderators)
+	-User views list of Users waiting for account to be created
+		-each new account will indicate if creation is allowed or not
+		-Table will be created to store Pending Account activation requests
+			-either yes or no for creation (if yes then account will be stored in Table, if no then account will not be created but stored in a Not Allowed Table)
+				-Might want to check comparison for future accounts and email IDs to see if more than one account is being attempted to be created by one person.??
+
+Use Case 2:
+
+User deletes account-
+	-User looks up and deletes an account
+		-Tables storing information and Messages of deleted account will also be deleted.
+			-Except for messages that have been already been sent (in the Receivers Tables of other account)
+			-Except for Deleted Messages Tables
+			-Account will be moved to Not Allowed Table
+
+Use Case 3:
+
+User has same rights as Moderators and Members
