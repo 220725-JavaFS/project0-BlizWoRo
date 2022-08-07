@@ -10,6 +10,6 @@ public abstract Message getMessageById(int id);
 	
 	List<Message> getAllMessage();
 
-	public abstract void InsertMessage(Message message);
+public abstract void InsertMessage(Message message);
 
 }

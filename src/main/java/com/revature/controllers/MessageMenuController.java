@@ -60,7 +60,18 @@ public class MessageMenuController {
 	}
 
 	public void createMessage() {
-		// TODO Auto-generated method stub
+		System.out.println("Great! Thank you for adding to our database. \nPlease let us know about the new message."+
+				"\nWhat is the new message?");
+				
+				Message message = new Message();
+				message.setMessage(scan.nextLine());
+				
+				System.out.println("Who will you send the message to?");
+				
+				message.seteMail(scan.nextLine());
+
+				messServ.newMessage(message);
+			
 		
 	}
 
@@ -77,7 +88,7 @@ public class MessageMenuController {
 				List<Message> list = messServ.allMessage();
 				System.out.println("Here are all the messages: ");
 				for(Message a:list){
-					System.out.println(a);// get all avengers
+					System.out.println(a);// get all messages
 				}
 				continue;
 			} else if (answer.equalsIgnoreCase("exit")) {
@@ -108,14 +119,12 @@ public class MessageMenuController {
 			System.out.println(
 					"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
 							+ "for all received messages. \nTYPE 'EXIT' to exit.");
-
 			answer = scan.nextLine();
-
 			if (answer.equalsIgnoreCase("all")) {
 				List<Message> list = messServ.allMessage();
-				System.out.println("Here are all the members: ");
+				System.out.println("Here are all the messages: ");
 				for(Message a:list){
-					System.out.println(a);// get all avengers
+					System.out.println(a);// get all messages
 				}
 				continue;
 			} else if (answer.equalsIgnoreCase("exit")) {
@@ -133,6 +142,7 @@ public class MessageMenuController {
 				Message message = messServ.getSingleMessage(id);
 
 				System.out.println("Here is your message: \n" + message);
+				
 			}
 
 		}
