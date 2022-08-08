@@ -2,10 +2,7 @@ package com.revature.controllers;
 
 import java.util.Scanner;
 
-import com.revature.models.Avenger;
-import com.revature.models.Home;
 import com.revature.models.MembersInfo;
-import com.revature.models.Message;
 import com.revature.services.MembersService;
 
 public class FirstPageController {
@@ -22,7 +19,6 @@ String choice = "";
 				
 				System.out.println("What would you like to do? "
 						+ "Please select from the options below. "
-						+ "Type 'EXIT' to exit."
 						+ "\n 1. Login."
 						+ "\n 2. Create an Account."
 						+ "\n 0. Exit");
@@ -70,25 +66,41 @@ String choice = "";
 				String answer = scan.nextLine();
 				if (answer.equalsIgnoreCase("yes")) {
 					member.setAdministrator(true);
+				}else {
+					member.setAdministrator(false);
 				}
 				System.out.println("Are you a Moderator?");
 				String answer2 = scan.nextLine();
 				if (answer2.equalsIgnoreCase("yes")) {
 					member.setModerator(true);
+				}else {
+					member.setModerator(false);
 				}
 				System.out.println("Are you a Regular Member?");
 				String answer3 = scan.nextLine();
 				if (answer3.equalsIgnoreCase("yes")) {
 					member.setRegMember(true);
+				}else {
+					member.setRegMember(false);
 				}
 				
-				memServ.recruitAvenger(member);
+				memServ.newMember(member);
 		
 	}
 
 	private void login() {
-		// TODO Auto-generated method stub
+		String answer ="";
+		System.out.println("Please enter your username.");
+		answer = scan.nextLine();
+		String answer2 = "";
+		System.out.println("Please enter your passowrd");
+		answer2 =scan.nextLine();
+		if(memServ.getMemberByUser(answer, answer2)) {
+			MessageMenuController mmc = new MessageMenuController();
+			
+			mmc.messageMenu();
+		}
 		
-	}
 
+	}
 }

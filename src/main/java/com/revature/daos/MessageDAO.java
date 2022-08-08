@@ -12,4 +12,8 @@ public abstract Message getMessageById(int id);
 
 public abstract void InsertMessage(Message message);
 
+Message getMessageByEmail(String eMail);
+
+public abstract List<Message> getAllRecMessage(String eMail);
+
 }

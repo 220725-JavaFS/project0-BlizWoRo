@@ -20,7 +20,6 @@ public class MessageMenuController {
 				
 				System.out.println("What would you like to do? "
 						+ "Please select from the options below. "
-						+ "Type 'EXIT' to exit."
 						+ "\n 1. View your received messages."
 						+ "\n 2. View your sent messages."
 						+ "\n 3. Send a new message."
@@ -60,7 +59,7 @@ public class MessageMenuController {
 	}
 
 	public void createMessage() {
-		System.out.println("Great! Thank you for adding to our database. \nPlease let us know about the new message."+
+		System.out.println("Great! Thank you for using our service. \nPlease let us know about the new message."+
 				"\nWhat is the new message?");
 				
 				Message message = new Message();
@@ -80,7 +79,7 @@ public class MessageMenuController {
 		while (!answer.equalsIgnoreCase("exit")) {
 			System.out.println(
 					"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
-							+ "for all received messages. \nTYPE 'EXIT' to exit.");
+							+ "for all received messages. Type 'EXIT' to exit");
 
 			answer = scan.nextLine();
 
@@ -120,8 +119,9 @@ public class MessageMenuController {
 					"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
 							+ "for all received messages. \nTYPE 'EXIT' to exit.");
 			answer = scan.nextLine();
+			String eMail = "dH@sight.com";
 			if (answer.equalsIgnoreCase("all")) {
-				List<Message> list = messServ.allMessage();
+				List<Message> list = messServ.allRecMessage(eMail);
 				System.out.println("Here are all the messages: ");
 				for(Message a:list){
 					System.out.println(a);// get all messages

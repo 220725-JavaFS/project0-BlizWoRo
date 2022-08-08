@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Scanner;
 
 import com.revature.models.Message;
 import com.revature.utils.ConnectionUtil;
 
 public class MessageDAOImpl implements MessageDAO {
+	
+	private Scanner scan = new Scanner(System.in);
 
 	@Override
 	public Message getMessageById(int id) {
-		try(Connection conn = ConnectionUtil.getConnection()){
-
-			String sql = "SELECT * FROM Message WHERE messageID= "+id+";";
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "SELECT * FROM Message WHERE messageID = "+id+";";
 			Statement statement = conn.createStatement(); 
 			ResultSet result = statement.executeQuery(sql);
 			if(result.next()) {
@@ -93,6 +94,62 @@ public class MessageDAOImpl implements MessageDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+	@Override
+	public Message getMessageByEmail(String eMail) {
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT * FROM Message WHERE eMail = " + "'"+eMail+"'" +";";
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			System.out.println(sql);
+			statement.setString(1,eMail);//this is where sql injection is checked for.
+			
+			ResultSet result = statement.executeQuery();
+			//System.out.println("result: " + result);
+			
+			if(result.next()) {
+				Message message = new Message();
+				message.setMessage(result.getString("message"));
+				message.seteMail(result.getString("eMail"));
+				
+				return message;
+			}
+		
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<Message> getAllRecMessage(String eMail) {
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT * FROM Message WHERE eMail = " + "'"+eMail+"'" +";";
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			System.out.println(sql);
+			//statement.setString(1,eMail);//this is where sql injection is checked for.
+			
+			ResultSet result = statement.executeQuery();
+			//System.out.println("result: " + result);
+			
+			if(result.next()) {
+				Message message = new Message();
+				message.setMessage(result.getString("message"));
+				message.seteMail(result.getString("eMail"));
+				
+				return message;
+			}
+		
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

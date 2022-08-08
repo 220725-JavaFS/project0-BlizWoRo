@@ -1,6 +1,11 @@
 package com.revature.models;
 
-public class Message {
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class Message implements List<Message> {
 	
 	private int messageID;
 	private String message;
@@ -73,6 +78,121 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [messageID=" + messageID + ", message=" + message + ", eMail=" + eMail + "]";
+	}
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean contains(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public Iterator<Message> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public <T> T[] toArray(T[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean add(Message e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean remove(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean addAll(Collection<? extends Message> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean addAll(int index, Collection<? extends Message> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Message get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Message set(int index, Message element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void add(int index, Message element) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Message remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int indexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int lastIndexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public ListIterator<Message> listIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ListIterator<Message> listIterator(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Message> subList(int fromIndex, int toIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

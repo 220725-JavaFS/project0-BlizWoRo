@@ -91,7 +91,7 @@ public class MembersInfo {
 		this.pWord = pWord;
 	}
 
-	public Boolean getAdministrator() {
+	public Boolean isAdministrator() {
 		return administrator;
 	}
 
@@ -99,7 +99,7 @@ public class MembersInfo {
 		this.administrator = administrator;
 	}
 
-	public Boolean getModerator() {
+	public Boolean isModerator() {
 		return moderator;
 	}
 
@@ -107,7 +107,7 @@ public class MembersInfo {
 		this.moderator = moderator;
 	}
 
-	public Boolean getRegMember() {
+	public Boolean isRegMember() {
 		return regMember;
 	}
 

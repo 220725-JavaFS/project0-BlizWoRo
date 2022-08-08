@@ -6,9 +6,10 @@ public interface MembersInfoDAO {
 	
 	MembersInfo getMemberByEmail(String eMail);
 
-	static void NewMember(MembersInfo member) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void NewMember(MembersInfo member);
+	
+	public abstract boolean Member (String userName, String pWord);
+	
+	
 
 }

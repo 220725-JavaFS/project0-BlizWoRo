@@ -10,6 +10,11 @@ public class MembersService {
 	private MembersInfoDAO membersDAO = new MembersInfoDAOImpl();
 	
 	public void newMember(MembersInfo member) {
-		MembersInfoDAO.NewMember(member);
-
+		membersDAO.NewMember(member);
+	}
+	
+	public boolean getMemberByUser (String userName, String pWord) {
+		return membersDAO.Member(userName,pWord);
+		
+	}
 }
