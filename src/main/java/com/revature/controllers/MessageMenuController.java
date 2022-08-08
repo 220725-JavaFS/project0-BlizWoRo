@@ -119,9 +119,9 @@ public class MessageMenuController {
 					"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
 							+ "for all received messages. \nTYPE 'EXIT' to exit.");
 			answer = scan.nextLine();
-			String eMail = "dH@sight.com";
+			//String eMail = "dH@sight.com";
 			if (answer.equalsIgnoreCase("all")) {
-				List<Message> list = messServ.allRecMessage(eMail);
+				List<Message> list = messServ.allMessage();
 				System.out.println("Here are all the messages: ");
 				for(Message a:list){
 					System.out.println(a);// get all messages
