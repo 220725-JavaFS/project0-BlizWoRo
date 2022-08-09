@@ -298,6 +298,115 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 		}
 		return false;
 	}
+	@Override
+	public MembersInfo getUpdateFirstName(int id, String change) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "UPDATE MembersInfo SET firstName = '"+change+"' WHERE memberID = "+id+";";
+			PreparedStatement prepares = conn.prepareStatement(sql); 
+			
+			
+			System.out.println(change);
+			System.out.println(id);
+
+			//String eMail = result.getString("eMail");
+			prepares.execute();
+
+			}
+			
+		catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getUpdateMemberLast(int id, String change) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "UPDATE MembersInfo SET lastName = '"+change+"' WHERE memberID = "+id+";";
+			PreparedStatement prepares = conn.prepareStatement(sql); 
+			
+			
+			System.out.println(change);
+			System.out.println(id);
+
+			//String eMail = result.getString("eMail");
+			prepares.execute();
+
+			}
+			
+		catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getUpdateEmail(int id, String change) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "UPDATE MembersInfo SET eMail = '"+change+"' WHERE memberID = "+id+";";
+			PreparedStatement prepares = conn.prepareStatement(sql); 
+			
+			
+			System.out.println(change);
+			System.out.println(id);
+
+			//String eMail = result.getString("eMail");
+			prepares.execute();
+
+			}
+			
+		catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getUpdateUser(int id, String change) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "UPDATE MembersInfo SET userName = '"+change+"' WHERE memberID = "+id+";";
+			PreparedStatement prepares = conn.prepareStatement(sql); 
+			
+			
+			System.out.println(change);
+			System.out.println(id);
+
+			//String eMail = result.getString("eMail");
+			prepares.execute();
+
+			}
+			
+		catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getUpdatePass(int id, String change) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "UPDATE MembersInfo SET pWord= '"+change+"' WHERE memberID = "+id+";";
+			PreparedStatement prepares = conn.prepareStatement(sql); 
+			
+			
+			System.out.println(change);
+			System.out.println(id);
+
+			//String eMail = result.getString("eMail");
+			prepares.execute();
+
+			}
+			
+		catch(SQLException e) {
+			e.printStackTrace();
+		
+		}
+		return null;
+	}
 }
 	
 

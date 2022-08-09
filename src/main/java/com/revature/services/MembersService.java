@@ -64,4 +64,24 @@ public class MembersService {
 		return membersDAO.getMemberByUserReg(answer, answer2);
 		
 	}
+	public MembersInfo getUpdateMemberFirst(int id, String change) {
+		return membersDAO.getUpdateFirstName(id, change);
+		
+	}
+
+	public MembersInfo getUpdateMemberLast(int id, String change) {
+		return membersDAO.getUpdateMemberLast(id, change);
+	}
+
+	public MembersInfo getUpdateMembereMail(int id, String change) {
+		return membersDAO.getUpdateEmail(id, change);
+	}
+
+	public MembersInfo getUpdateMemberUser(int id, String change) {
+		return membersDAO.getUpdateUser(id, change);
+	}
+
+	public MembersInfo getUpdateMemberPass(int id, String change) {
+		return membersDAO.getUpdatePass(id, change);
+	}
 }

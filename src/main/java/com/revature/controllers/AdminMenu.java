@@ -165,43 +165,91 @@ public class AdminMenu {
 		
 	}
 
-	private void seeUpdateMember() {
-		String answer ="";
-		while(!answer.equalsIgnoreCase("exit")) {
-			System.out.println("What would you like to do? "
-					+ "\nTo view members by ID, type 'ID'. "
-					+ "\nType 'All' to view all members."
-					+ "\nType 'EXIT' to exit.");
-			answer = scan.nextLine();
-			
-			if(answer.equalsIgnoreCase("all")) {
-				List<MembersInfo> list = memServ.allMembers();
-				System.out.println("Here is all the Members: ");
-				for(MembersInfo a:list) {
-					System.out.println(a);
-				}continue;
-			}else if(answer.equalsIgnoreCase("exit")) {
-				return;
-			}else {
-				int id = 0;
-				String change = "";
-				String columnName = "";
-				System.out.println("What would you like to update?");
-				columnName=scan.nextLine();
-				System.out.println("What would you like to change it to?");
-				change=scan.nextLine();
-				try {
-					id=Integer.parseInt(answer);
-				}catch(NumberFormatException e) {
-					System.out.println("Not a valid input. Please try again.");
-					continue;
-				}
-				MembersInfo member = memServ.getUpdateMember(id, columnName, change);
+	public void seeUpdateMember() {
+			String answer ="";
+			while(!answer.equalsIgnoreCase("exit")) {
+				System.out.println("What would you like to do? "
+						+ "\nType 'All' to view all members, column names, and their ID's."
+						+ "\nTo update a particular member, type 'ID' for the ID. "
+						+ "\nType 'EXIT' to exit and go back to previous menu.");
+				answer = scan.nextLine();
 				
+				if(answer.equalsIgnoreCase("all")) {
+					List<MembersInfo> list = memServ.allMembers();
+					System.out.println("Here is all the Members: ");
+					for(MembersInfo a:list) {
+						System.out.println(a);
+					}continue;
+				}else if(answer.equalsIgnoreCase("exit")) {
+					return;
+				}else {
+					int id = 0;
+					String change = "";
+					String columnName = "";
+					System.out.println("What would you like to update?");
+					columnName=scan.nextLine();
+					if(columnName.equalsIgnoreCase("firstname")) {
+						
+						System.out.println("What would you like to change it to?");
+						change=scan.nextLine();
+						try {
+							id=Integer.parseInt(answer);
+						}catch(NumberFormatException e) {
+							System.out.println("Not a valid input. Please try again.");
+							continue;
+						}
+						MembersInfo member = memServ.getUpdateMemberFirst(id, change);
+					}else if(columnName.equalsIgnoreCase("lastname")) {
+						
+						System.out.println("What would you like to change it to?");
+						change=scan.nextLine();
+						try {
+							id=Integer.parseInt(answer);
+						}catch(NumberFormatException e) {
+							System.out.println("Not a valid input. Please try again.");
+							continue;
+						}
+						MembersInfo member = memServ.getUpdateMemberLast(id, change);
+					
+					}else if(columnName.equalsIgnoreCase("eMail")) {
+						
+						System.out.println("What would you like to change it to?");
+						change=scan.nextLine();
+						try {
+							id=Integer.parseInt(answer);
+						}catch(NumberFormatException e) {
+							System.out.println("Not a valid input. Please try again.");
+							continue;
+						}
+						MembersInfo member = memServ.getUpdateMembereMail(id, change);
+					}else if(columnName.equalsIgnoreCase("username")) {
+						
+						System.out.println("What would you like to change it to?");
+						change=scan.nextLine();
+						try {
+							id=Integer.parseInt(answer);
+						}catch(NumberFormatException e) {
+							System.out.println("Not a valid input. Please try again.");
+							continue;
+						}
+						MembersInfo member = memServ.getUpdateMemberUser(id, change);
+					}else if(columnName.equalsIgnoreCase("password")) {
+						
+						System.out.println("What would you like to change it to?");
+						change=scan.nextLine();
+						try {
+							id=Integer.parseInt(answer);
+						}catch(NumberFormatException e) {
+							System.out.println("Not a valid input. Please try again.");
+							continue;
+						}
+						MembersInfo member = memServ.getUpdateMemberPass(id, change);
+					}
+					
+				}
 			}
+			
 		}
-		
-	}
 
 
 	private void deleteMember() {

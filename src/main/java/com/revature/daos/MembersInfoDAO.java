@@ -29,6 +29,15 @@ public interface MembersInfoDAO {
 
 	public abstract boolean getMemberByUserReg(String answer, String answer2);
 	
+	public abstract MembersInfo getUpdateFirstName(int id, String change);
+
+	public abstract MembersInfo getUpdateMemberLast(int id, String change);
+
+	public abstract MembersInfo getUpdateEmail(int id, String change);
+
+	public abstract MembersInfo getUpdateUser(int id, String change);
+
+	public abstract MembersInfo getUpdatePass(int id, String change);
 	
 
 }

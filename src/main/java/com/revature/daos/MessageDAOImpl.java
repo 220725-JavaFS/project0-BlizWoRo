@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revature.models.MembersInfo;
 import com.revature.models.Message;
 import com.revature.utils.ConnectionUtil;
 
@@ -170,5 +171,6 @@ public class MessageDAOImpl implements MessageDAO {
 		}
 		return null;
 	}
+	
 
 }
