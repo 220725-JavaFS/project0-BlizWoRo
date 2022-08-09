@@ -7,6 +7,10 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Welcome to New Tech Messaging. How may I be of service?");
 		
+		//AdminMenu am = new AdminMenu();
+		
+		//am.adminMenu();
+		
 		FirstPageController fpc = new FirstPageController();
 		
 		fpc.firstMenu();

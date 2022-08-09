@@ -1,19 +1,30 @@
 package com.revature.models;
 
-public class MembersInfo {
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class MembersInfo implements List<MembersInfo>{
 	
 	private int memberID;
 	private String firstName;
 	private String lastName;
 	private String eMail;
 	private String userName; 
-	private String pWord; 
-	private Boolean administrator; 
-	private Boolean moderator;
-	private Boolean regMember;
 	
-	public MembersInfo(int memberID, String firstName, String lastName, String eMail, String userName, String pWord,
-			Boolean administrator, Boolean moderator, Boolean regMember) {
+	public LevelMember getLevelmem() {
+		return levelmem;
+	}
+
+	public void setLevelmem(LevelMember levelmem) {
+		this.levelmem = levelmem;
+	}
+
+	private String pWord;
+	private LevelMember levelmem;
+	
+	public MembersInfo(int memberID, String firstName, String lastName, String eMail, String userName, String pWord) {
 		super();
 		this.memberID = memberID;
 		this.firstName = firstName;
@@ -21,22 +32,15 @@ public class MembersInfo {
 		this.eMail = eMail;
 		this.userName = userName;
 		this.pWord = pWord;
-		this.administrator = administrator;
-		this.moderator = moderator;
-		this.regMember = regMember;
 	}
 
-	public MembersInfo(String firstName, String lastName, String eMail, String userName, String pWord,
-			Boolean administrator, Boolean moderator, Boolean regMember) {
+	public MembersInfo(String firstName, String lastName, String eMail, String userName, String pWord) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.eMail = eMail;
 		this.userName = userName;
 		this.pWord = pWord;
-		this.administrator = administrator;
-		this.moderator = moderator;
-		this.regMember = regMember;
 	}
 
 	public MembersInfo() {
@@ -91,42 +95,15 @@ public class MembersInfo {
 		this.pWord = pWord;
 	}
 
-	public Boolean isAdministrator() {
-		return administrator;
-	}
-
-	public void setAdministrator(Boolean administrator) {
-		this.administrator = administrator;
-	}
-
-	public Boolean isModerator() {
-		return moderator;
-	}
-
-	public void setModerator(Boolean moderator) {
-		this.moderator = moderator;
-	}
-
-	public Boolean isRegMember() {
-		return regMember;
-	}
-
-	public void setRegMember(Boolean regMember) {
-		this.regMember = regMember;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((administrator == null) ? 0 : administrator.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + memberID;
-		result = prime * result + ((moderator == null) ? 0 : moderator.hashCode());
 		result = prime * result + ((pWord == null) ? 0 : pWord.hashCode());
-		result = prime * result + ((regMember == null) ? 0 : regMember.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
@@ -140,11 +117,6 @@ public class MembersInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		MembersInfo other = (MembersInfo) obj;
-		if (administrator == null) {
-			if (other.administrator != null)
-				return false;
-		} else if (!administrator.equals(other.administrator))
-			return false;
 		if (eMail == null) {
 			if (other.eMail != null)
 				return false;
@@ -162,20 +134,10 @@ public class MembersInfo {
 			return false;
 		if (memberID != other.memberID)
 			return false;
-		if (moderator == null) {
-			if (other.moderator != null)
-				return false;
-		} else if (!moderator.equals(other.moderator))
-			return false;
 		if (pWord == null) {
 			if (other.pWord != null)
 				return false;
 		} else if (!pWord.equals(other.pWord))
-			return false;
-		if (regMember == null) {
-			if (other.regMember != null)
-				return false;
-		} else if (!regMember.equals(other.regMember))
 			return false;
 		if (userName == null) {
 			if (other.userName != null)
@@ -188,8 +150,148 @@ public class MembersInfo {
 	@Override
 	public String toString() {
 		return "MembersInfo [memberID=" + memberID + ", firstName=" + firstName + ", lastName=" + lastName + ", eMail="
-				+ eMail + ", userName=" + userName + ", pWord=" + pWord + ", administrator=" + administrator
-				+ ", moderator=" + moderator + ", regMember=" + regMember + "]";
+				+ eMail + ", userName=" + userName + ", pWord=" + pWord + "]";
 	}
 
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterator<MembersInfo> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean add(MembersInfo e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addAll(Collection<? extends MembersInfo> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addAll(int index, Collection<? extends MembersInfo> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MembersInfo get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MembersInfo set(int index, MembersInfo element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(int index, MembersInfo element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MembersInfo remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int indexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int lastIndexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ListIterator<MembersInfo> listIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ListIterator<MembersInfo> listIterator(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MembersInfo> subList(int fromIndex, int toIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	
 }

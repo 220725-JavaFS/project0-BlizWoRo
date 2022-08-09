@@ -152,4 +152,23 @@ public class MessageDAOImpl implements MessageDAO {
 		return null;
 	}
 
+
+	@Override
+	public Message getCountMessage() {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "SELECT COUNT(messageID)AS Count FROM Message;";
+			Statement statement = conn.createStatement(); 
+			ResultSet result = statement.executeQuery(sql);
+			//System.out.println(result);
+			result.next();
+			int count = result.getInt(1);
+			
+			System.out.println("The total count is: "+count);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

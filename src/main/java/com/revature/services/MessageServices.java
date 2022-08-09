@@ -30,5 +30,9 @@ public class MessageServices {
 		messageDAO.InsertMessage(message);
 
 	}
+
+	public Message getMessageCount() {
+		return messageDAO.getCountMessage();
+	}
 	
 }

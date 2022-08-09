@@ -2,11 +2,14 @@ package com.revature.controllers;
 
 import java.util.Scanner;
 
+import com.revature.models.LevelMember;
 import com.revature.models.MembersInfo;
+import com.revature.services.LevelService;
 import com.revature.services.MembersService;
 
 public class FirstPageController {
 	
+	private LevelService levelmem = new LevelService();
 	private MembersService memServ = new MembersService();
 	private Scanner scan = new Scanner(System.in);
 	
@@ -45,8 +48,9 @@ String choice = "";
 	private void createMember() {
 		System.out.println("Great! Thank you for becoming a Member. \nPlease fill out the required information."+
 				"\nWhat is your First Name?");
-				
+				LevelMember level = new LevelMember();
 				MembersInfo member = new MembersInfo();
+				String email = "";
 				member.setFirstName(scan.nextLine());
 				
 				System.out.println("What is your Last Name?");
@@ -54,7 +58,9 @@ String choice = "";
 				member.setLastName(scan.nextLine());
 				
 				System.out.println("What is your Email Address?");
-				member.seteMail(scan.nextLine());
+				email = scan.nextLine();
+				member.seteMail(email);
+				level.seteMail(email);
 				
 				System.out.println("What is your username?");
 				member.setUserName(scan.nextLine());
@@ -62,29 +68,9 @@ String choice = "";
 				System.out.println("what is your password?");
 				member.setpWord(scan.nextLine());
 				
-				System.out.println("Are you an Administrator?");
-				String answer = scan.nextLine();
-				if (answer.equalsIgnoreCase("yes")) {
-					member.setAdministrator(true);
-				}else {
-					member.setAdministrator(false);
-				}
-				System.out.println("Are you a Moderator?");
-				String answer2 = scan.nextLine();
-				if (answer2.equalsIgnoreCase("yes")) {
-					member.setModerator(true);
-				}else {
-					member.setModerator(false);
-				}
-				System.out.println("Are you a Regular Member?");
-				String answer3 = scan.nextLine();
-				if (answer3.equalsIgnoreCase("yes")) {
-					member.setRegMember(true);
-				}else {
-					member.setRegMember(false);
-				}
 				
-				memServ.newMember(member);
+				
+				memServ.newMember(member, level);
 		
 	}
 
@@ -93,14 +79,23 @@ String choice = "";
 		System.out.println("Please enter your username.");
 		answer = scan.nextLine();
 		String answer2 = "";
-		System.out.println("Please enter your passowrd");
+		System.out.println("Please enter your password");
 		answer2 =scan.nextLine();
-		if(memServ.getMemberByUser(answer, answer2)) {
-			MessageMenuController mmc = new MessageMenuController();
+		if(memServ.getMemberByUserAdmin(answer, answer2)==true) {
+			AdminMenu am = new AdminMenu();
 			
-			mmc.messageMenu();
+			am.adminMenu();
+		}else if(memServ.getMemberByUserMod(answer, answer2)==true) {
+			ModMenu mm = new ModMenu();
+			mm.modMenu();
+		}else if(memServ.getMemberByUserReg(answer, answer2)==true) {
+			RegMenu rm = new RegMenu();
+			
+			rm.regMenu();
+		}else {
+		System.out.println("not a valid user. Please try again.");
+			
+			return;
 		}
-		
-
 	}
 }

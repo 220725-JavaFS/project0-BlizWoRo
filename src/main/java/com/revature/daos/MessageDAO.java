@@ -16,4 +16,6 @@ Message getMessageByEmail(String eMail);
 
 public abstract List<Message> getAllRecMessage(String eMail);
 
+public abstract Message getCountMessage();
+
 }
