@@ -35,7 +35,7 @@ public class LevelMemberDAOImpl implements LevelMemberDAO {
 			String sql = "SELECT * FROM LevelMember WHERE eMail = " + "'"+eMail+"'" +";";
 			
 			PreparedStatement statement = conn.prepareStatement(sql);
-			System.out.println(sql);
+			//System.out.println(sql);
 			statement.setString(1,eMail);//this is where sql injection is checked for.
 			
 			ResultSet result = statement.executeQuery();

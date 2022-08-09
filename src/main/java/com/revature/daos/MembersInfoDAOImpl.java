@@ -179,32 +179,14 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 
 	@Override
 	public MembersInfo getDeletedMember(int id) {
-		try(Connection conn = ConnectionUtil.getConnection()){		
-			String sql = "DELETE FROM MembersInfo WHERE memberID = "+id+";";
-			Statement statement = conn.createStatement(); 
-			ResultSet result = statement.executeQuery(sql);
-			System.out.println(result);
-			if(result.next()) {
-				//results sets are cursor base, each time .next is called the cursor moves to the next group of values. 
-				//It starts the one before so you will always need to call the next.
-				
-				MembersInfo member = new MembersInfo(
-					result.getInt("membersID"),
-					result.getString("firstName"),
-					result.getString("lastName"), 
-					result.getString("eMail"), 
-					result.getString("userName"), 
-					result.getString("pWord")
-					);
-
-			//String eMail = result.getString("eMail");
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "DELETE FROM MembersInfo WHERE memberID = "+id+";"; 
+			PreparedStatement prepares = conn.prepareStatement(sql);
+		
+			prepares.execute();
+		
+		} catch (SQLException e) {
 			
-				
-				return null;
-				
-			}
-			
-		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
