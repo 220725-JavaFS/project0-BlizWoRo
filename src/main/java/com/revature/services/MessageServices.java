@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.revature.daos.MessageDAO;
 import com.revature.daos.MessageDAOImpl;
+import com.revature.models.MembersInfo;
 import com.revature.models.Message;
 
 public class MessageServices {
@@ -34,5 +35,11 @@ public class MessageServices {
 	public Message getMessageCount() {
 		return messageDAO.getCountMessage();
 	}
+
+	public List<Message> yourMessage(String answer, String answer2) {
+		return messageDAO.getYourMessage(answer, answer2);
+	}
+
+	
 	
 }

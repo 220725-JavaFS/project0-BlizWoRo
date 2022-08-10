@@ -26,7 +26,7 @@ public class AdminMenu {
 				
 				System.out.println("What would you like to do? "
 						+ "Please select from the options below. "
-						+ "\n 1. View your received messages."
+						+ "\n 1. View All messages."
 						+ "\n 2. Update member information."
 						+ "\n 3. Send a new message."
 						+ "\n 4. Count your total messages."
@@ -34,7 +34,7 @@ public class AdminMenu {
 						+ "\n 6. Delete a member."
 						+ "\n 7. View Current Members."
 						+ "\n 8. Update member level."
-						+ "\n 0. Exit");
+						+ "\n 0. LogOut");
 				
 				choice = scan.nextLine();
 				switchChoice:
@@ -290,7 +290,45 @@ public class AdminMenu {
 			if(answer.equalsIgnoreCase("yes")) {
 				
 				MembersInfo membersCount = memServ.getMembersCount();
-				System.out.println("The number of Members are: "+membersCount);
+				//int addCount = 0;
+				System.out.println("If you want a break down list of different "
+						+ "member catagories, "
+						+ "\ntype 'YES' otherwise type 'EXIT' for no.");
+				answer = scan.nextLine();
+				if(answer.equalsIgnoreCase("yes")) {
+					String choice = "";
+					menuLoop:
+						while(!choice.equalsIgnoreCase("0")) {
+							
+							System.out.println("Choose the Category: "
+									+ "\n 1. Count of Total Administrators."
+									+ "\n 2. Count of Total Moderators."
+									+ "\n 3. Count of Total Members."
+									+ "\n 0. Exit.");
+							choice = scan.nextLine();
+							switchChoice:
+								switch(choice) {
+								case "1":
+									totalAdmin();
+									break switchChoice;
+								case "2":
+									totalMod();
+									break switchChoice;
+								case "3":
+									totalReg();
+									break switchChoice;
+								case "0":
+									break switchChoice;
+									default:
+										System.out.println("This is not a valid input, try again.");
+										break switchChoice;
+								}
+								
+							
+						}
+				}else if(answer.equalsIgnoreCase("no")) {
+					return;
+				}
 			
 			} else if(answer.equalsIgnoreCase("no")) {
 			System.out.println("OK Good Bye.");
@@ -299,6 +337,48 @@ public class AdminMenu {
 			
 		}
 		
+	}
+
+	private void totalReg() {
+		String answer = "";
+		while(!answer.equalsIgnoreCase("exit")) {
+			System.out.println("Would you like to see the total regular member count?"
+					+ "\nIf yes type'YES' and if no type 'EXIT'.");
+			answer=scan.nextLine();
+			
+			if(answer.equalsIgnoreCase("yes")) {
+				
+				MembersInfo regCount = memServ.getMembersRegCount(0, null);
+			}
+		}
+	}
+
+	private void totalMod() {
+		String answer = "";
+		while(!answer.equalsIgnoreCase("exit")) {
+			System.out.println("Would you like to see the total moderator count?"
+					+ "\nIf yes type'YES' and if no type 'EXIT'.");
+			answer=scan.nextLine();
+			
+			if(answer.equalsIgnoreCase("yes")) {
+				
+				MembersInfo modCount = memServ.getMembersModCount(0, null);
+			}
+		}
+	}
+
+	private void totalAdmin() {
+		String answer = "";
+		while(!answer.equalsIgnoreCase("exit")) {
+			System.out.println("Would you like to see the total administrator count?"
+					+ "\nIf yes type'YES' and if no type 'EXIT'.");
+			answer=scan.nextLine();
+			
+			if(answer.equalsIgnoreCase("yes")) {
+				
+				MembersInfo adminCount = memServ.getMembersAdminCount(0, null);
+			}
+		}
 	}
 
 	private void countTotalMessage() {

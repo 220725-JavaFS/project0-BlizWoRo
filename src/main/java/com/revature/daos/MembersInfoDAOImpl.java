@@ -34,8 +34,6 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 				member.setFirstName(result.getString("firstName"));
 				member.setLastName(result.getString("lastName"));
 				member.seteMail(result.getString("eMail"));
-				member.setUserName(result.getString("userName"));
-				member.setpWord(result.getString("pWord"));
 				
 				return member;
 			}
@@ -54,7 +52,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 			String sql = "BEGIN; "
 					+ "INSERT INTO MembersInfo "
 					+ "(firstName, lastName, eMail, userName, pWord) "
-					+ "VALUES (?, ?, ?, ?, ?); "
+					+ "VALUES (?, ?, ?, ?, crypt(?, gen_salt('bf'))); "
 					+ "INSERT INTO LevelMember (eMail) "
 					+ "VALUES (?); "
 					+ "COMMIT;";
@@ -81,7 +79,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 	@Override
 	public boolean Member(String userName, String pWord) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM MembersInfo WHERE userName = '"+userName+"' AND pWord ='"+pWord+"';";
+			String sql = "SELECT * FROM MembersInfo WHERE userName = '"+userName+"' AND pWord = crypt('"+pWord+"', pWord);";
 			Statement statement = conn.createStatement(); 
 			ResultSet result = statement.executeQuery(sql);
 			if(result.next()) {
@@ -113,9 +111,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 					result.getInt("memberID"),
 					result.getString("firstName"),
 					result.getString("lastName"), 
-					result.getString("eMail"), 
-					result.getString("userName"), 
-					result.getString("pWord")
+					result.getString("eMail")
 					);
 
 			//String eMail = result.getString("eMail");
@@ -150,9 +146,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 						result.getInt("memberID"),
 						result.getString("firstName"),
 						result.getString("lastName"), 
-						result.getString("eMail"), 
-						result.getString("userName"), 
-						result.getString("pWord")
+						result.getString("eMail")
 						);	
 				
 				String email = result.getString("eMail");
@@ -207,6 +201,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 			e.printStackTrace();
 		}
 		return null;
+		
 	
 		}
 
@@ -240,7 +235,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "SELECT * FROM MembersInfo JOIN LevelMember ON "
 					+ "MembersInfo.eMail = LevelMember.eMail WHERE "
-					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = '"+answer2+"' "
+					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = crypt('"+answer2+"', pWord) "
 							+ "AND LevelMember.administrator = TRUE;";
 			Statement statement = conn.createStatement(); 
 			ResultSet result = statement.executeQuery(sql);
@@ -262,7 +257,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "SELECT * FROM MembersInfo JOIN LevelMember ON "
 					+ "MembersInfo.eMail = LevelMember.eMail WHERE "
-					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = '"+answer2+"' "
+					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = crypt('"+answer2+"', pWord) "
 							+ "AND LevelMember.moderator = TRUE;";
 			Statement statement = conn.createStatement(); 
 			ResultSet result = statement.executeQuery(sql);
@@ -283,7 +278,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "SELECT * FROM MembersInfo JOIN LevelMember ON "
 					+ "MembersInfo.eMail = LevelMember.eMail WHERE "
-					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = '"+answer2+"' "
+					+ "MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = crypt('"+answer2+"', pWord) "
 							+ "AND LevelMember.regMember = TRUE;";
 			Statement statement = conn.createStatement(); 
 			ResultSet result = statement.executeQuery(sql);
@@ -389,7 +384,7 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 	@Override
 	public MembersInfo getUpdatePass(int id, String change) {
 		try(Connection conn = ConnectionUtil.getConnection()){		
-			String sql = "UPDATE MembersInfo SET pWord= '"+change+"' WHERE memberID = "+id+";";
+			String sql = "UPDATE MembersInfo SET pWord= crypt('"+change+"', gen_salt('bf')) WHERE memberID = "+id+";";
 			PreparedStatement prepares = conn.prepareStatement(sql); 
 			
 			
@@ -404,6 +399,67 @@ public class MembersInfoDAOImpl implements MembersInfoDAO {
 		catch(SQLException e) {
 			e.printStackTrace();
 		
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getRegCount(int count, LevelMember reg) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "SELECT COUNT (memberID) FROM MembersInfo "
+					+ "LEFT JOIN LevelMember ON MembersInfo.eMail = LevelMember.eMail "
+					+ "WHERE LevelMember.regMember = TRUE;";
+			Statement statement = conn.createStatement(); 
+			ResultSet result = statement.executeQuery(sql);
+			//System.out.println(result);
+			result.next();
+			count = result.getInt(1);
+			
+			System.out.println("The total count is: "+count);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+
+	@Override
+	public MembersInfo getModCount(int count, LevelMember mod) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "SELECT COUNT (memberID) FROM MembersInfo "
+					+ "LEFT JOIN LevelMember ON MembersInfo.eMail = LevelMember.eMail "
+					+ "WHERE LevelMember.moderator = TRUE;";
+			Statement statement = conn.createStatement(); 
+			ResultSet result = statement.executeQuery(sql);
+			//System.out.println(result);
+			result.next();
+			count = result.getInt(1);
+			
+			System.out.println("The total count is: "+count);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public MembersInfo getAdminCount(int count, LevelMember admin) {
+		try(Connection conn = ConnectionUtil.getConnection()){		
+			String sql = "SELECT COUNT (memberID) FROM MembersInfo "
+					+ "LEFT JOIN LevelMember ON MembersInfo.eMail = LevelMember.eMail "
+					+ "WHERE LevelMember.administrator = TRUE;";
+			Statement statement = conn.createStatement(); 
+			ResultSet result = statement.executeQuery(sql);
+			//System.out.println(result);
+			result.next();
+			count = result.getInt(1);
+			
+			System.out.println("The total count is: "+count);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

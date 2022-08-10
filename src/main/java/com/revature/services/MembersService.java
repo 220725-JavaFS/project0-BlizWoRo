@@ -84,4 +84,16 @@ public class MembersService {
 	public MembersInfo getUpdateMemberPass(int id, String change) {
 		return membersDAO.getUpdatePass(id, change);
 	}
+
+	public MembersInfo getMembersRegCount(int count, LevelMember reg) {
+		return membersDAO.getRegCount(count, reg);
+	}
+
+	public MembersInfo getMembersModCount(int count, LevelMember mod) {
+		return membersDAO.getModCount(count, mod);
+	}
+
+	public MembersInfo getMembersAdminCount(int count, LevelMember admin) {
+		return membersDAO.getAdminCount(count, admin);
+	}
 }

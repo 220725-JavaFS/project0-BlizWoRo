@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import java.util.List;
 
+import com.revature.models.MembersInfo;
 import com.revature.models.Message;
 
 public interface MessageDAO {
@@ -17,5 +18,8 @@ Message getMessageByEmail(String eMail);
 public abstract List<Message> getAllRecMessage(String eMail);
 
 public abstract Message getCountMessage();
+
+public abstract List<Message> getYourMessage(String answer, String answer2);
+
 
 }

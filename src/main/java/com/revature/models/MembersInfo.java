@@ -10,6 +10,23 @@ public class MembersInfo implements List<MembersInfo>{
 	private int memberID;
 	private String firstName;
 	private String lastName;
+	public MembersInfo(int memberID, String firstName, String lastName, String eMail) {
+		super();
+		this.memberID = memberID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.eMail = eMail;
+	}
+
+	public MembersInfo(int memberID, String firstName, String lastName, String eMail, LevelMember levelmem) {
+		super();
+		this.memberID = memberID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.eMail = eMail;
+		this.levelmem = levelmem;
+	}
+
 	private String eMail;
 	private String userName; 
 	

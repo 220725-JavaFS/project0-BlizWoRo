@@ -38,6 +38,12 @@ public interface MembersInfoDAO {
 	public abstract MembersInfo getUpdateUser(int id, String change);
 
 	public abstract MembersInfo getUpdatePass(int id, String change);
+
+	public abstract MembersInfo getRegCount(int count, LevelMember reg);
+
+	public abstract MembersInfo getModCount(int count, LevelMember mod);
+
+	public abstract MembersInfo getAdminCount(int count, LevelMember admin);
 	
 
 }

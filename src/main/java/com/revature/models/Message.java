@@ -37,6 +37,11 @@ public class Message implements List<Message> {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	public Message(int messageID, String message) {
+		super();
+		this.messageID = messageID;
+		this.message = message;
+	}
 	public String geteMail() {
 		return eMail;
 	}

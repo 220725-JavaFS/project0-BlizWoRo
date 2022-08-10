@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.revature.models.MembersInfo;
 import com.revature.models.Message;
 import com.revature.utils.ConnectionUtil;
 
@@ -129,7 +128,7 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getAllRecMessage(String eMail) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "SELECT * FROM Message WHERE eMail = " + "'"+eMail+"'" +";";
+			String sql = "SELECT * FROM Message WHERE eMail = '"+eMail+"';";
 			
 			PreparedStatement statement = conn.prepareStatement(sql);
 			System.out.println(sql);
@@ -171,6 +170,42 @@ public class MessageDAOImpl implements MessageDAO {
 		}
 		return null;
 	}
+
+
+	@Override
+	public List<Message> getYourMessage(String answer, String answer2) {
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT messageID, message FROM Message "
+					+ "JOIN MembersInfo ON Message.eMail = MembersInfo.eMail "
+					+ "AND MembersInfo.userName = '"+answer+"' AND MembersInfo.pWord = crypt('"+answer2+"', pWord);";
+			
+			PreparedStatement statement = conn.prepareStatement(sql);
+			//statement.setString(1,eMail);//this is where sql injection is checked for.
+			
+			ResultSet result = statement.executeQuery();
+			//System.out.println("result: " + result);
+			List<Message> messageList = new LinkedList<Message>();
+			
+			while(result.next()) {
+				//results sets are cursor base, each time .next is called the cursor moves to the next group of values. 
+				//It starts the one before so you will always need to call the next.
+				
+				Message message = new Message(
+						result.getInt("messageID"),
+						result.getString("message")
+						);		
+				messageList.add(message);
+			}
+			
+			return messageList;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 	
 
 }

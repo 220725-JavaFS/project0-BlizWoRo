@@ -23,29 +23,25 @@ public void modMenu() {
 			
 			System.out.println("What would you like to do? "
 					+ "Please select from the options below. "
-					+ "\n 1. View your received messages."
-					+ "\n 2. Send a new message."
-					+ "\n 3. Count your total messages."
-					+ "\n 4. Count total members."
-					+ "\n 5. View Current Members."
-					+ "\n 0. Exit");
+					+ "\n 1. Send a new message."
+					+ "\n 2. Count your total messages."
+					+ "\n 3. Count total members."
+					+ "\n 4. View Current Members."
+					+ "\n 0. LogOut");
 			
 			choice = scan.nextLine();
 			switchChoice:
 				switch(choice) {
 				case "1":
-					seeReceivedMessage();
-					break switchChoice;
-				case "2":
 					createMessage();
 					break switchChoice;
-				case "3":
+				case "2":
 					countTotalMessage();
 					break switchChoice;
-				case "4":
+				case "3":
 					countTotalMember();
 					break switchChoice;
-				case "5":
+				case "4":
 					viewMember();
 					break switchChoice;
 				case "0":
@@ -102,7 +98,42 @@ private void countTotalMember() {
 		if(answer.equalsIgnoreCase("yes")) {
 			
 			MembersInfo membersCount = memServ.getMembersCount();
-			System.out.println("The number of Members are: "+membersCount);
+			//int addCount = 0;
+			System.out.println("If you want a break down list of different "
+					+ "member catagories, "
+					+ "\ntype 'YES' otherwise type 'EXIT' for no.");
+			answer = scan.nextLine();
+			if(answer.equalsIgnoreCase("yes")) {
+				String choice = "";
+				menuLoop:
+					while(!choice.equalsIgnoreCase("0")) {
+						
+						System.out.println("Choose the Category: "
+								+ "\n 1. Count of Total Administrators."
+								+ "\n 2. Count of Total Moderators."
+								+ "\n 3. Count of Total Members."
+								+ "\n 0. Exit.");
+						choice = scan.nextLine();
+						switchChoice:
+							switch(choice) {
+							case "1":
+								totalMod();
+								break switchChoice;
+							case "2":
+								totalReg();
+								break switchChoice;
+							case "0":
+								break switchChoice;
+								default:
+									System.out.println("This is not a valid input, try again.");
+									break switchChoice;
+							}
+							
+						
+					}
+			}else if(answer.equalsIgnoreCase("no")) {
+				return;
+			}
 		
 		} else if(answer.equalsIgnoreCase("no")) {
 		System.out.println("OK Good Bye.");
@@ -135,6 +166,34 @@ private void countTotalMessage() {
 	
 }
 
+private void totalReg() {
+	String answer = "";
+	while(!answer.equalsIgnoreCase("exit")) {
+		System.out.println("Would you like to see the total regular member count?"
+				+ "\nIf yes type'YES' and if no type 'EXIT'.");
+		answer=scan.nextLine();
+		
+		if(answer.equalsIgnoreCase("yes")) {
+			
+			MembersInfo regCount = memServ.getMembersRegCount(0, null);
+		}
+	}
+}
+
+private void totalMod() {
+	String answer = "";
+	while(!answer.equalsIgnoreCase("exit")) {
+		System.out.println("Would you like to see the total moderator count?"
+				+ "\nIf yes type'YES' and if no type 'EXIT'.");
+		answer=scan.nextLine();
+		
+		if(answer.equalsIgnoreCase("yes")) {
+			
+			MembersInfo modCount = memServ.getMembersModCount(0, null);
+		}
+	}
+}
+
 private void createMessage() {
 	System.out.println("Great! Thank you for using our service. \nPlease let us know about the new message."+
 			"\nWhat is the new message?");
@@ -151,41 +210,41 @@ private void createMessage() {
 	
 }
 
-private void seeReceivedMessage() {
-	String answer = "";
-	while (!answer.equalsIgnoreCase("exit")) {
-		System.out.println(
-				"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
-						+ "for all received messages. \nTYPE 'EXIT' to exit.");
-		answer = scan.nextLine();
-		//String eMail = "dH@sight.com";
-		if (answer.equalsIgnoreCase("all")) {
-			List<Message> list = messServ.allMessage();
-			System.out.println("Here are all the messages: ");
-			for(Message a:list){
-				System.out.println(a);// get all messages
-			}
-			continue;
-		} else if (answer.equalsIgnoreCase("exit")) {
-			return;
-		} else {
-			int id = 0;
-
-			try {
-				id = Integer.parseInt(answer);
-			} catch (NumberFormatException e) {
-				System.out.println("That is not a valid id, please try again");
-				continue;
-			}
-
-			Message message = messServ.getSingleMessage(id);
-
-			System.out.println("Here is your message: \n" + message);
-			
-		}
-
-	}
-	
+//private void seeReceivedMessage() {
+//	String answer = "";
+//	while (!answer.equalsIgnoreCase("exit")) {
+//		System.out.println(
+//				"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
+//						+ "for all received messages. \nTYPE 'EXIT' to exit.");
+//		answer = scan.nextLine();
+//		//String eMail = "dH@sight.com";
+//		if (answer.equalsIgnoreCase("all")) {
+//			List<Message> list = messServ.allMessage();
+//			System.out.println("Here are all the messages: ");
+//			for(Message a:list){
+//				System.out.println(a);// get all messages
+//			}
+//			continue;
+//		} else if (answer.equalsIgnoreCase("exit")) {
+//			return;
+//		} else {
+//			int id = 0;
+//
+//			try {
+//				id = Integer.parseInt(answer);
+//			} catch (NumberFormatException e) {
+//				System.out.println("That is not a valid id, please try again");
+//				continue;
+//			}
+//
+//			Message message = messServ.getSingleMessage(id);
+//
+//			System.out.println("Here is your message: \n" + message);
+//			
+//		}
+//
+//	}
+//	
 }
 
-}
+
