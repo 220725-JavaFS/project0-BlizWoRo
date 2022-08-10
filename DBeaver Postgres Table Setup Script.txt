@@ -1,0 +1,67 @@
+CREATE EXTENSION pgcrypto;
+DROP TABLE IF EXISTS MembersInfo CASCADE;
+DROP TABLE IF EXISTS Message CASCADE;
+DROP TABLE IF EXISTS LevelMember CASCADE;
+
+CREATE TABLE MembersInfo (
+memberID SERIAL PRIMARY Key,
+firstName VARCHAR (25),
+lastName VARCHAR (25),
+eMail VARCHAR(25) UNIQUE,
+userName VARCHAR(20) UNIQUE NOT NULL, 
+pWord VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE LevelMember(
+memberLevelID SERIAL PRIMARY KEY,
+eMail VARCHAR(25) REFERENCES MembersInfo(eMail) ON UPDATE CASCADE ON DELETE CASCADE,
+administrator boolean DEFAULT (false), 
+moderator boolean DEFAULT (False),
+regMember boolean DEFAULT(true)
+);
+
+CREATE TABLE Message (
+messageID SERIAL PRIMARY KEY,
+message VARCHAR(500),
+eMail VARCHAR(25) REFERENCES MembersInfo(eMail) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('saumik','shome','ss@revature.net','Admin',crypt('Password',gen_salt('bf')));
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('dustin','shipley','ds@revature.net','Mod',crypt('Password2',gen_salt('bf')));
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('hunter','kelley','hk@revature.net','Regular',crypt('Password3',gen_salt('bf')));
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('alejandro','huerta','ah@revature.net','admin',crypt('Password4',gen_salt('bf')));
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('soloman','oh','so@revature.net','mod',crypt('Password5',gen_salt('bf')));
+
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES 
+('tim','gettie','tg@revature.com','Instruct',crypt('PasswordTeach',gen_salt('bf')));
+
+SELECT * FROM MembersInfo WHERE userName = 'Regular' AND pWord = crypt('changePass', pWord);
+
+UPDATE MembersInfo SET pWord= crypt('changePass', gen_salt('bf')) WHERE memberID = 3;
+
+INSERT INTO LevelMember (eMail, administrator) VALUES ('ss@revature.net', TRUE);
+
+INSERT INTO LevelMember (eMail, administrator) VALUES ('ah@revature.net', TRUE);
+
+INSERT INTO LevelMember (eMail, moderator) VALUES ('ds@revature.net', TRUE);
+
+INSERT INTO LevelMember (eMail, moderator) VALUES ('so@revature.net', TRUE);
+
+INSERT INTO LevelMember (eMail, administrator) VALUES ('hk@revature.net', TRUE);
+
+INSERT INTO LevelMember (eMail, administrator) VALUES ('tg@revature.com', TRUE);
+
+BEGIN; 
+INSERT INTO MembersInfo (firstName, lastName, eMail, userName, pWord) VALUES ('sam', 'song', 'test', 'usertest', crypt('pass', gen_salt('bf'))); 
+INSERT INTO LevelMember (eMail) VALUES ('test'); 
+COMMIT;
