@@ -10,6 +10,10 @@ public class MembersInfo implements List<MembersInfo>{
 	private int memberID;
 	private String firstName;
 	private String lastName;
+	private String eMail;
+	private String userName;
+	private String pWord;
+	
 	public MembersInfo(int memberID, String firstName, String lastName, String eMail) {
 		super();
 		this.memberID = memberID;
@@ -27,8 +31,7 @@ public class MembersInfo implements List<MembersInfo>{
 		this.levelmem = levelmem;
 	}
 
-	private String eMail;
-	private String userName; 
+	
 	
 	public LevelMember getLevelmem() {
 		return levelmem;
@@ -38,7 +41,7 @@ public class MembersInfo implements List<MembersInfo>{
 		this.levelmem = levelmem;
 	}
 
-	private String pWord;
+	
 	private LevelMember levelmem;
 	
 	public MembersInfo(int memberID, String firstName, String lastName, String eMail, String userName, String pWord) {

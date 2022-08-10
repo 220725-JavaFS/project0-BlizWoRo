@@ -422,15 +422,19 @@ public class AdminMenu {
 		while (!answer.equalsIgnoreCase("exit")) {
 			System.out.println(
 					"Which message would you like to see? \nPlease give the ID number or type 'ALL' "
-							+ "for all received messages. \nTYPE 'EXIT' to exit.");
+							+ "for all received messages. "
+							+ "\nTYPE 'EXIT' to exit.");
 			answer = scan.nextLine();
 			//String eMail = "dH@sight.com";
 			if (answer.equalsIgnoreCase("all")) {
 				List<Message> list = messServ.allMessage();
 				System.out.println("Here are all the messages: ");
+				int count =0;
 				for(Message a:list){
+					count++;
 					System.out.println(a);// get all messages
 				}
+				System.out.println("Total Messages: " +count);
 				continue;
 			} else if (answer.equalsIgnoreCase("exit")) {
 				return;
@@ -445,7 +449,8 @@ public class AdminMenu {
 				}
 
 				Message message = messServ.getSingleMessage(id);
-
+				int count = 0;
+				//messServ.
 				System.out.println("Here is your message: \n" + message);
 				
 			}

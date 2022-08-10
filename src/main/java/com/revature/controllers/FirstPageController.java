@@ -140,7 +140,7 @@ String choice = "";
 			mm.modMenu();
 			}
 		}else if(memServ.getMemberByUserReg(answer, answer2)==true) {
-			System.out.println("Would you like to view your messages or go to the Moderator Menu?"
+			System.out.println("Would you like to view your messages or go to the Member Menu?"
 					+ "\n Type 'Message' for your messages."
 					+ "\n Type 'Menu' for your menu option.");
 			String choice = "";
